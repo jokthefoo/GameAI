@@ -33,29 +33,30 @@ Steering DynamicAlign(RigidBody character, RigidBody target, float maxAngAccel, 
 		}
 	}
 
-	if (diffOrien > slowA || diffOrien < -slowA)
+	float diffOrienMag = abs(diffOrien);
+
+	if (diffOrienMag > slowA )
 	{ 
-		targetR = maxAngAccel;
+		targetR = maxRot;
 	}
-	else if (diffOrien < targetA && diffOrien > -targetA)
+	else if (diffOrienMag < targetA)
 	{
-		targetR = 0;
+		steer.angular = 0;
+		steer.linear = Vector2();
+		return steer;
 	}
 	else
 	{
-		float fact = diffOrien / slowA;
-		float magA = maxAngAccel * fact;
-		targetR = magA;
+		targetR = maxRot * diffOrienMag / slowA;
 	}
+	targetR *= diffOrien / diffOrienMag;
+	targetR -= character.rot;
 	targetR /= timeToTarget;
 
-	if (targetR > maxAngAccel)
+	if (abs(targetR) > maxAngAccel)
 	{
-		targetR = maxAngAccel;
-	}
-	else if (targetR < -maxAngAccel)
-	{
-		targetR = -maxAngAccel;
+		targetR /= abs(targetR);
+		targetR *= maxAngAccel;
 	}
 
 	steer.angular = targetR;
@@ -91,5 +92,44 @@ Steering DynamicFace(RigidBody character, RigidBody target, float maxAngAccel, f
 	targ.orien = atan2f(dir.y, dir.x);
 	steer = DynamicAlign(character, targ, maxAngAccel, maxRot, targetA, slowA, timeToTarget);
 
+	return steer;
+}
+
+Steering DynamicArrive(RigidBody character, RigidBody target, float maxLinAccel, float maxSpd, float targetR, float slowR, float timeToTarget)
+{
+	Steering steer;
+
+	float targetSpeed;
+	Vector2 dir = target.pos - character.pos;
+	float dist = dir.Mag();
+
+	if (dist > slowR)
+	{
+		targetSpeed = maxSpd;
+	}
+	else if (dist < targetR)
+	{
+		steer.linear = Vector2();
+		steer.angular = 0;
+		return steer;
+	}
+	else
+	{
+		targetSpeed = maxSpd * dist / slowR;
+	}
+
+	dir.Normalize();
+	Vector2 targetVel = dir * targetSpeed;
+	targetVel -= character.vel;
+	targetVel /= timeToTarget;
+
+	if (targetVel.Mag() > maxLinAccel)
+	{
+		targetVel.Normalize();
+		targetVel *= maxLinAccel;
+	}
+
+	steer.linear = targetVel;
+	steer.angular = 0;
 	return steer;
 }
