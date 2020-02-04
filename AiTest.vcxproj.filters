@@ -15,6 +15,9 @@
     </ClCompile>
     <ClCompile Include="src\BasicAI.cpp" />
     <ClCompile Include="src\SteerObj.cpp" />
+    <ClCompile Include="src\WanderObj.cpp" />
+    <ClCompile Include="src\FlockingObj.cpp" />
+    <ClCompile Include="src\SteerWander.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -36,6 +39,9 @@
     </ClInclude>
     <ClInclude Include="src\BasicAI.h" />
     <ClInclude Include="src\SteerObj.h" />
+    <ClInclude Include="src\WanderObj.h" />
+    <ClInclude Include="src\FlockingObj.h" />
+    <ClInclude Include="src\SteerWander.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

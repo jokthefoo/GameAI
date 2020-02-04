@@ -182,18 +182,24 @@
   <ItemGroup>
     <ClCompile Include="src\basic-motion.cpp" />
     <ClCompile Include="src\Boid.cpp" />
+    <ClCompile Include="src\FlockingObj.cpp" />
     <ClCompile Include="src\SteerObj.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
     <ClCompile Include="src\BasicAI.cpp" />
+    <ClCompile Include="src\SteerWander.cpp" />
+    <ClCompile Include="src\WanderObj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\basic-motion.h" />
     <ClInclude Include="src\Boid.h" />
+    <ClInclude Include="src\FlockingObj.h" />
     <ClInclude Include="src\SteerObj.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\RBody.h" />
     <ClInclude Include="src\BasicAI.h" />
+    <ClInclude Include="src\SteerWander.h" />
+    <ClInclude Include="src\WanderObj.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

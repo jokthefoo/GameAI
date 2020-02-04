@@ -133,3 +133,77 @@ Steering DynamicArrive(RigidBody character, RigidBody target, float maxLinAccel,
 	steer.angular = 0;
 	return steer;
 }
+
+Steering Wander(RigidBody character, float wanderOffset, float wanderRadius, float wanderRate, float maxLinAccel, float maxAngAccel, float maxRot, float targetA, float slowA, float timeToTarget, float* wanderOrien)
+{
+	Steering steer;
+	float r = rand() - rand();
+	r /= RAND_MAX;
+	*wanderOrien += r * wanderRate;
+	float targetOrien = *wanderOrien + character.orien;
+	RigidBody target;
+	target.pos = character.pos + OrientationToVec(character.orien) * wanderOffset;
+	target.pos += OrientationToVec(targetOrien) * wanderRadius;
+
+	steer = DynamicFace(character, target, maxAngAccel, maxRot, targetA, slowA, timeToTarget);
+
+	steer.linear = OrientationToVec(character.orien) * maxLinAccel;
+
+	return steer;
+}
+
+Steering Seperation(RigidBody character, RigidBody ** targets, int numTargets, float threshold, float decayCoef, float maxLinAccel, int ignoreIndex)
+{
+	Steering steer;
+
+	Vector2 lin;
+	for(int i = 0; i < numTargets; i++)
+	{
+		if (i != ignoreIndex)
+		{
+			Vector2 dir = character.pos - (*targets[i]).pos;
+			float dist = dir.Mag();
+			if (dist < threshold)
+			{
+				float str = min(decayCoef / (dist * dist), maxLinAccel);
+				dir.Normalize();
+				lin += dir * str;
+			}
+		}
+	}
+
+	if (lin.Mag() > maxLinAccel)
+	{
+		lin.Normalize();
+		lin *= maxLinAccel;
+	}
+
+	steer.linear = lin;
+	steer.angular = 0;
+	return steer;
+}
+
+Steering VelocityMatch(RigidBody character, RigidBody target, float maxLinAccel, float timeToTarget)
+{
+	Steering steer;
+
+	steer.linear = target.vel - character.vel;
+	steer.linear /= timeToTarget;
+
+	if (steer.linear.Mag() > maxLinAccel)
+	{
+		steer.linear.Normalize();
+		steer.linear *= maxLinAccel;
+	}
+	steer.angular = 0;
+
+	return steer;
+}
+
+Vector2 OrientationToVec(float orien)
+{
+	Vector2 ret;
+	ret.x = sin(orien);
+	ret.y = cos(orien);
+	return ret;
+}

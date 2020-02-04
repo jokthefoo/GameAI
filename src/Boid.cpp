@@ -13,10 +13,17 @@ void Boid::DrawBoid()
 	ofPushMatrix();
 
 	ofTranslate(rBody.pos.x, rBody.pos.y);
-	ofSetColor(ofColor(255, 255, 255));
-	ofDrawCircle(0, 0, 25);
+
+	ofSetColor(0, 0, 0);
+	ofDrawCircle(0, 0, 26);
 	ofRotateZRad(rBody.orien);
+	ofDrawTriangle(0, -26, 41, 0, 0, 26);
+
+	ofSetColor(c);
+	ofDrawCircle(0, 0, 25);
+	//ofRotateZRad(rBody.orien);
 	ofDrawTriangle(0, - 25, 40, 0, 0, 25);
+
 
 	ofPopMatrix();
 

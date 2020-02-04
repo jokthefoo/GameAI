@@ -1,46 +1,54 @@
 #include "ofApp.h"
-#include "SteerObj.h"
+#include "FlockingObj.h"
 
-SteerObj* b;
-Vector2 bred [100];
+const int flockSize = 30;
+FlockingObj flock[flockSize];
+RigidBody* flockBodies[flockSize];
 RigidBody target;
-int bredNum;
-float bredTime = 0;
-
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofBackground(51, 153, 255);
-	target.pos.x = ofGetWindowWidth() / 2.0f;
-	target.pos.y = ofGetWindowHeight() / 2.0f;
-	b = new SteerObj(&target);
+	for (int i = 0; i < flockSize; i++)
+	{
+		flockBodies[i] = &flock[i].rBody;
+	}
+	for (int i = 0; i < flockSize; i++)
+	{
+		flock[i].index = i;
+		flock[i].numTargets = flockSize;
+		flock[i].targets = flockBodies;
+		flock[i].UpdatePos(ofGetWindowWidth()/2,ofGetWindowHeight()/2);
+	}
+	flock[0].leader = true;
+	flock[0].mass = 300;
+	flock[0].c = ofColor(0, 255, 0);
 }
 
 //--------------------------------------------------------------
 void ofApp::update(){
-	b->UpdateObj(ofGetLastFrameTime());
-
-	bredTime += ofGetLastFrameTime();
-	if (bredTime > .3)
+	RigidBody centerOfMass;
+	float massTot = 0;
+	for (int i = 0; i < flockSize; i++)
 	{
-		bredNum++;
-		if (bredNum > 19)
+		centerOfMass.pos += flock[i].rBody.pos * flock[i].mass;
+		massTot += flock[i].mass;
+	}
+	centerOfMass.pos /= massTot;
+
+	for (int i = 0; i < flockSize; i++)
+	{
+		flock[i].target = centerOfMass;
+		if (i == 0)
 		{
-			bredNum = 0;
+			flock[i].target = target;
 		}
-		bred[bredNum].x = b->rBody.pos.x;
-		bred[bredNum].y = b->rBody.pos.y;
-		bredTime = 0;
+		flock[i].UpdateObj(ofGetLastFrameTime());
 	}
 }
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	// Draw dots
-	for (int i = 0; i < 100; i++)
-	{
-		ofDrawCircle(bred[i].x, bred[i].y, 5);
-	}
-	
+
 	// Draw target circle
 	ofSetColor(ofColor(255, 0, 0));
 	ofDrawCircle(target.pos.x, target.pos.y, 15);
@@ -54,7 +62,10 @@ void ofApp::draw(){
 	ofDrawCircle(target.pos.x, target.pos.y, 3);
 
 
-	b->DrawBoid();
+	for (int i = 0; i < flockSize; i++)
+	{
+		flock[i].DrawBoid();
+	}
 }
 
 //--------------------------------------------------------------
