@@ -49,7 +49,7 @@ void FlockingObj::UpdateObj(float dt)
 			RigidBody target;
 			target.pos.x = ofRandomWidth();
 			target.pos.y = ofRandomHeight();
-			steer.linear = DynamicArrive(rBody, target, maxLinAccel, maxSpd, targetR, slowR, timeTo).linear;
+			steer.linear = DynamicArrive(rBody, target, maxLinAccel / 2, maxSpd, targetR, slowR, timeTo).linear;
 			steer.angular = DynamicLookDir(rBody, maxAngAccel, maxRot, targetA, slowA, timeTo).angular;
 		}
 	}

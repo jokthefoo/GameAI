@@ -51,6 +51,7 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
+	/*
 	// Draw target circle
 	ofSetColor(ofColor(255, 0, 0));
 	ofDrawCircle(target.pos.x, target.pos.y, 15);
@@ -62,7 +63,7 @@ void ofApp::draw(){
 	ofDrawCircle(target.pos.x, target.pos.y, 6);
 	ofSetColor(ofColor(255, 0, 0));
 	ofDrawCircle(target.pos.x, target.pos.y, 3);
-
+	*/
 
 	for (int i = 0; i < flockSize; i++)
 	{

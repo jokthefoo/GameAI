@@ -14,4 +14,6 @@ public:
 	void UpdatePos(float x, float y);
 	void UpdateOrientation(float a);
 	void UpdateKinematic(float dt, Steering steer, float maxVel = 1000.0, float maxRot = 1000.0);
+	void BoidWrap();
+	void GhostBoid();
 };

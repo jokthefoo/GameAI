@@ -4,8 +4,8 @@
 
 namespace SteerWander
 {
-	//SteerObj* b;
-	WanderObj* b;
+	SteerObj* b;
+	//WanderObj* b;
 	Vector2 bred[100];
 	RigidBody target;
 	int bredNum;
@@ -16,8 +16,8 @@ namespace SteerWander
 		ofBackground(51, 153, 255);
 		target.pos.x = ofGetWindowWidth() / 2.0f;
 		target.pos.y = ofGetWindowHeight() / 2.0f;
-		//b = new SteerObj(&target);
-		b = new WanderObj();
+		b = new SteerObj(&target);
+		//b = new WanderObj();
 	}
 
 	//--------------------------------------------------------------
