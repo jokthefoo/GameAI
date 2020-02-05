@@ -22,7 +22,7 @@ void FlockingObj::UpdateObj(float dt)
 	float decayCoef = 5000;
 	steer.linear += Seperation(rBody, targets, numTargets, threshold, decayCoef, maxLinAccel, index).linear * 3.0f;
 
-	target.vel = target.pos * dt;
+	//target.vel = target.pos * dt;
 	steer.linear += VelocityMatch(rBody, target, maxLinAccel, timeTo).linear * .6f;
 
 	if (steer.linear.Mag() > maxLinAccel)
@@ -47,8 +47,8 @@ void FlockingObj::UpdateObj(float dt)
 		if (rBody.pos.x > ofGetWindowWidth() || rBody.pos.x < 0 || rBody.pos.y > ofGetWindowHeight() || rBody.pos.y < 0)
 		{
 			RigidBody target;
-			target.pos.x = ofGetWindowWidth() / 2;
-			target.pos.y = ofGetWindowHeight() / 2;
+			target.pos.x = ofRandomWidth();
+			target.pos.y = ofRandomHeight();
 			steer.linear = DynamicArrive(rBody, target, maxLinAccel, maxSpd, targetR, slowR, timeTo).linear;
 			steer.angular = DynamicLookDir(rBody, maxAngAccel, maxRot, targetA, slowA, timeTo).angular;
 		}

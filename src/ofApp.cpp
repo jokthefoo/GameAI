@@ -31,9 +31,11 @@ void ofApp::update(){
 	for (int i = 0; i < flockSize; i++)
 	{
 		centerOfMass.pos += flock[i].rBody.pos * flock[i].mass;
+		centerOfMass.vel += flock[i].rBody.vel * flock[i].mass;
 		massTot += flock[i].mass;
 	}
 	centerOfMass.pos /= massTot;
+	centerOfMass.vel /= massTot;
 
 	for (int i = 0; i < flockSize; i++)
 	{

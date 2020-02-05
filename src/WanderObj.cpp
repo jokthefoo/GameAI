@@ -17,8 +17,8 @@ void WanderObj::UpdateObj(float dt)
 	if (rBody.pos.x > ofGetWindowWidth() || rBody.pos.x < 0 || rBody.pos.y > ofGetWindowHeight() || rBody.pos.y < 0)
 	{
 		RigidBody target;
-		target.pos.x = ofGetWindowWidth() / 2;
-		target.pos.y = ofGetWindowHeight() / 2;
+		target.pos.x = ofRandomWidth();
+		target.pos.y = ofRandomHeight();
 		steer.linear = DynamicArrive(rBody, target, 25, 100, 10, 300, 1).linear;
 		steer.angular = DynamicLookDir(rBody, 3.0f, 1, .1f, .9f, 1).angular;
 	}
