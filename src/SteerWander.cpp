@@ -28,7 +28,7 @@ namespace SteerWander
 		if (bredTime > .3)
 		{
 			bredNum++;
-			if (bredNum > 19)
+			if (bredNum > 99)
 			{
 				bredNum = 0;
 			}

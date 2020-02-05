@@ -13,11 +13,21 @@
     <ClCompile Include="src\basic-motion.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\BasicAI.cpp" />
-    <ClCompile Include="src\SteerObj.cpp" />
-    <ClCompile Include="src\WanderObj.cpp" />
-    <ClCompile Include="src\FlockingObj.cpp" />
-    <ClCompile Include="src\SteerWander.cpp" />
+    <ClCompile Include="src\BasicAI.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FlockingObj.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SteerObj.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SteerWander.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WanderObj.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -37,13 +47,25 @@
     <ClInclude Include="src\basic-motion.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\BasicAI.h" />
-    <ClInclude Include="src\SteerObj.h" />
-    <ClInclude Include="src\WanderObj.h" />
-    <ClInclude Include="src\FlockingObj.h" />
-    <ClInclude Include="src\SteerWander.h" />
+    <ClInclude Include="src\BasicAI.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FlockingObj.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SteerObj.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SteerWander.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WanderObj.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="icon.rc" />
+    <ResourceCompile Include="icon.rc">
+      <Filter>src</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

@@ -9,8 +9,8 @@ void WanderObj::UpdateObj(float dt)
 	float maxLinAccel = 10;
 	float maxAngAccel = 10;
 	float maxRot = 100;
-	float targetA = 3;
-	float slowA = 90;
+	float targetA = .1;
+	float slowA = .9;
 	float timeTo = 1;
 	steer = Wander(rBody, wanderOffset, wanderRadius, wanderRate, maxLinAccel, maxAngAccel, maxRot, targetA, slowA, timeTo, &wanderOrien);
 

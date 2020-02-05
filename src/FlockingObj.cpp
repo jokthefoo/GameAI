@@ -20,7 +20,7 @@ void FlockingObj::UpdateObj(float dt)
 
 	float threshold = 500;
 	float decayCoef = 5000;
-	steer.linear += Seperation(rBody, targets, numTargets, threshold, decayCoef, maxLinAccel, index).linear * 2.0f;
+	steer.linear += Seperation(rBody, targets, numTargets, threshold, decayCoef, maxLinAccel, index).linear * 3.0f;
 
 	target.vel = target.pos * dt;
 	steer.linear += VelocityMatch(rBody, target, maxLinAccel, timeTo).linear * .6f;

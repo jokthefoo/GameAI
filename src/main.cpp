@@ -1,5 +1,6 @@
 #include "ofMain.h"
-//#include "basic-motion.h"
+#include "basic-motion.h"
+#include "SteerWander.h"
 #include "ofApp.h"
 
 //========================================================================
