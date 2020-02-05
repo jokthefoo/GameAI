@@ -4,6 +4,8 @@ To run: Move project into openframeworks/apps/myApps/ then open in Visual Studio
 
 To change run mode, in main.cpp uncomment a different ofRunApp()
 
+
+
 Files:
 
 BasicAI is where all the algorithms are located.
