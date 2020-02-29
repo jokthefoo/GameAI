@@ -183,6 +183,9 @@
     <ClCompile Include="src\basic-motion.cpp" />
     <ClCompile Include="src\Boid.cpp" />
     <ClCompile Include="src\FlockingObj.cpp" />
+    <ClCompile Include="src\Pathfinding\DirectedGraph.cpp" />
+    <ClCompile Include="src\Pathfinding\Heuristic.cpp" />
+    <ClCompile Include="src\Pathfinding\PathfindingApp.cpp" />
     <ClCompile Include="src\SteerObj.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -194,6 +197,15 @@
     <ClInclude Include="src\basic-motion.h" />
     <ClInclude Include="src\Boid.h" />
     <ClInclude Include="src\FlockingObj.h" />
+    <ClInclude Include="src\Pathfinding\DirectedGraph.h" />
+    <ClInclude Include="src\Pathfinding\DirectedWeightedEdge.h" />
+    <ClInclude Include="src\Pathfinding\FileReader.h" />
+    <ClInclude Include="src\Pathfinding\Heuristic.h" />
+    <ClInclude Include="src\Pathfinding\NodeRecord.h" />
+    <ClInclude Include="src\Pathfinding\NRQueue.h" />
+    <ClInclude Include="src\Pathfinding\Path.h" />
+    <ClInclude Include="src\Pathfinding\Pathfinding.h" />
+    <ClInclude Include="src\Pathfinding\PathfindingApp.h" />
     <ClInclude Include="src\SteerObj.h" />
     <ClInclude Include="src\ofApp.h" />
     <ClInclude Include="src\RBody.h" />

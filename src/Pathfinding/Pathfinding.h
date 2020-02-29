@@ -4,6 +4,7 @@
 #include "DirectedWeightedEdge.h"
 #include "NodeRecord.h"
 #include "Heuristic.h"
+#include "NRQueue.h"
 
 Path pathfindingAStar(DirectedGraph graph, int startNode, int goal, Heuristic heuristic)
 {
@@ -13,15 +14,15 @@ Path pathfindingAStar(DirectedGraph graph, int startNode, int goal, Heuristic he
 	startRecord.costSoFar = 0;
 	startRecord.estimateToGoal = heuristic.getEstimate(startNode);
 
-	open = new PathfindingList();
-	open.Add(startRecord);
+	MyQueue<NodeRecord> open;
+	open.push(startRecord);
 
-	closed = new PathfindingList();
+	MyQueue<NodeRecord> closed;
 
 	NodeRecord current;
-	while (open.Length > 0)
+	while (open.size() > 0)
 	{
-		current = open.Pop();
+		current = open.top();
 
 		if (current.node == goal)
 		{
@@ -37,19 +38,19 @@ Path pathfindingAStar(DirectedGraph graph, int startNode, int goal, Heuristic he
 			float g = curEdge.cost + current.costSoFar;
 			float h = heuristic.getEstimate(sinkID);
 
-			if (closed.Contains(sinkID))
+			if (closed.contains(sinkID))
 			{
-				NodeRecord vistedNR = closed.Get(sinkID);
+				NodeRecord vistedNR = closed.get(sinkID);
 				if (vistedNR.costSoFar <= g)
 				{
 					continue;
 				}
 
-				closed.Remove(sinkID);
+				closed.remove(sinkID);
 			}
-			else if (open.Contains(sinkID))
+			else if (open.contains(sinkID))
 			{
-				NodeRecord vistedNR = open.Get(sinkID);
+				NodeRecord vistedNR = open.get(sinkID);
 				if (vistedNR.costSoFar <= g)
 				{
 					continue;
@@ -61,11 +62,11 @@ Path pathfindingAStar(DirectedGraph graph, int startNode, int goal, Heuristic he
 			newNodeR.incomingEdge = &curEdge;
 			newNodeR.estimateToGoal = g + h;
 
-			open.Add(newNodeR);
+			open.push(newNodeR);
 		}
 
-		open.Remove(current);
-		closed.Add(current);
+		open.pop();
+		closed.push(current);
 	}
 
 	Path p;
@@ -77,7 +78,7 @@ Path pathfindingAStar(DirectedGraph graph, int startNode, int goal, Heuristic he
 	while (current.node != startNode)
 	{
 		p.path.push_front(*current.incomingEdge);
-		current = closed.Find(current.incomingEdge->source);
+		current = closed.get(current.incomingEdge->source);
 	}
 	return p;
 }

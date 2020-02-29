@@ -28,6 +28,9 @@
     <ClCompile Include="src\WanderObj.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\Pathfinding\DirectedGraph.cpp" />
+    <ClCompile Include="src\Pathfinding\Heuristic.cpp" />
+    <ClCompile Include="src\Pathfinding\PathfindingApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -62,6 +65,15 @@
     <ClInclude Include="src\WanderObj.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\Pathfinding\NodeRecord.h" />
+    <ClInclude Include="src\Pathfinding\DirectedGraph.h" />
+    <ClInclude Include="src\Pathfinding\DirectedWeightedEdge.h" />
+    <ClInclude Include="src\Pathfinding\Path.h" />
+    <ClInclude Include="src\Pathfinding\Pathfinding.h" />
+    <ClInclude Include="src\Pathfinding\Heuristic.h" />
+    <ClInclude Include="src\Pathfinding\NRQueue.h" />
+    <ClInclude Include="src\Pathfinding\PathfindingApp.h" />
+    <ClInclude Include="src\Pathfinding\FileReader.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc">

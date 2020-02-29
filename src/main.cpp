@@ -2,6 +2,7 @@
 #include "basic-motion.h"
 #include "SteerWander.h"
 #include "ofApp.h"
+#include "Pathfinding/PathfindingApp.h"
 
 //========================================================================
 int main( ){
@@ -12,6 +13,7 @@ int main( ){
 	// pass in width and height too:
 	//ofRunApp(new basic::basicMotion());
 	//ofRunApp(new SteerWander::SteerWander());
-	ofRunApp(new ofApp());
+	//ofRunApp(new ofApp());
+	ofRunApp(new PathfindingApp());
 
 }

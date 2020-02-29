@@ -5,7 +5,9 @@
 
 class DirectedGraph
 {
-	std::vector<std::list<DirectedWeightedEdge>> edges;
+	std::vector<std::list<DirectedWeightedEdge>> nodes;
 public:
 	std::list<DirectedWeightedEdge> getOutgoingEdges(int node);
+	void addEdge(DirectedWeightedEdge edges);
+	void constructGraph(int numNodes);
 };
