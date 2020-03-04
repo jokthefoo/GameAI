@@ -184,7 +184,6 @@
     <ClCompile Include="src\Boid.cpp" />
     <ClCompile Include="src\FlockingObj.cpp" />
     <ClCompile Include="src\Pathfinding\DirectedGraph.cpp" />
-    <ClCompile Include="src\Pathfinding\Heuristic.cpp" />
     <ClCompile Include="src\Pathfinding\PathfindingApp.cpp" />
     <ClCompile Include="src\SteerObj.cpp" />
     <ClCompile Include="src\main.cpp" />

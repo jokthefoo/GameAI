@@ -10,4 +10,5 @@ public:
 	std::list<DirectedWeightedEdge> getOutgoingEdges(int node);
 	void addEdge(DirectedWeightedEdge edges);
 	void constructGraph(int numNodes);
+	static DirectedGraph BuildGridGraph(int, int*);
 };

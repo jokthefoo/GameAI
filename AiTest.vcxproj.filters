@@ -29,7 +29,6 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="src\Pathfinding\DirectedGraph.cpp" />
-    <ClCompile Include="src\Pathfinding\Heuristic.cpp" />
     <ClCompile Include="src\Pathfinding\PathfindingApp.cpp" />
   </ItemGroup>
   <ItemGroup>

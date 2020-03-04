@@ -6,23 +6,25 @@
 #include "Heuristic.h"
 #include "NRQueue.h"
 
-Path pathfindingAStar(DirectedGraph graph, int startNode, int goal, Heuristic heuristic)
+Path pathfindingAStar(DirectedGraph graph, int startNode, int goal, Heuristic &heuristic)
 {
 	NodeRecord startRecord;
 	startRecord.node = startNode;
-	startRecord.incomingEdge = nullptr;
 	startRecord.costSoFar = 0;
-	startRecord.estimateToGoal = heuristic.getEstimate(startNode);
+	startRecord.estimateToGoal = heuristic.getEstimate(startNode, goal);
 
-	MyQueue<NodeRecord> open;
-	open.push(startRecord);
+	MySet open;
+	open.insert(startRecord);
 
-	MyQueue<NodeRecord> closed;
+	MySet closed;
+
+	int visited = 0;
 
 	NodeRecord current;
 	while (open.size() > 0)
 	{
-		current = open.top();
+		current = *open.begin();
+		visited++;
 
 		if (current.node == goal)
 		{
@@ -30,13 +32,14 @@ Path pathfindingAStar(DirectedGraph graph, int startNode, int goal, Heuristic he
 		}
 
 		std::list<DirectedWeightedEdge> outgoing = graph.getOutgoingEdges(current.node);
-
-		for (int i = 0; i < outgoing.size(); i++)
+		size_t numEdge = outgoing.size();
+		for (size_t i = 0; i < numEdge; i++)
 		{
 			DirectedWeightedEdge curEdge = outgoing.front();
+			outgoing.pop_front();
 			int sinkID = curEdge.sink;
 			float g = curEdge.cost + current.costSoFar;
-			float h = heuristic.getEstimate(sinkID);
+			float h = heuristic.getEstimate(sinkID, goal);
 
 			if (closed.contains(sinkID))
 			{
@@ -59,14 +62,15 @@ Path pathfindingAStar(DirectedGraph graph, int startNode, int goal, Heuristic he
 
 			NodeRecord newNodeR;
 			newNodeR.node = sinkID;
-			newNodeR.incomingEdge = &curEdge;
+			newNodeR.incomingEdge = curEdge;
 			newNodeR.estimateToGoal = g + h;
+			newNodeR.costSoFar = g;
 
-			open.push(newNodeR);
+			open.insert(newNodeR);
 		}
 
-		open.pop();
-		closed.push(current);
+		open.remove(current.node);
+		closed.insert(current);
 	}
 
 	Path p;
@@ -77,8 +81,10 @@ Path pathfindingAStar(DirectedGraph graph, int startNode, int goal, Heuristic he
 
 	while (current.node != startNode)
 	{
-		p.path.push_front(*current.incomingEdge);
-		current = closed.get(current.incomingEdge->source);
+		p.path.push_front(current.incomingEdge);
+		current = closed.get(current.incomingEdge.source);
 	}
+
+	printf("nodes visited: %d", visited);
 	return p;
 }

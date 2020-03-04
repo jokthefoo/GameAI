@@ -1,68 +1,42 @@
 #pragma once
 #include "NodeRecord.h"
-#include <queue>
+#include <set>
 
-bool compareNR(const NodeRecord lhs, const NodeRecord rhs)
+class MySet : public std::multiset<NodeRecord>
 {
-	return lhs.estimateToGoal < lhs.estimateToGoal;
-}
 
-//Some code from stack overflow https://stackoverflow.com/questions/16749723/how-i-can-find-value-in-priority-queue
-template<
-	class NodeRecord,
-	class Container = std::vector<NodeRecord>,
-	class Compare = decltype(compareNR)
-> class MyQueue : public std::priority_queue<NodeRecord, Container, Compare>
-{
 public:
-	typedef typename
-		std::priority_queue<
-		NodeRecord,
-		Container,
-		Compare>::container_type::const_iterator const_iterator;
-
-	NodeRecord get(const NodeRecord) const
+	NodeRecord get(const int val) const
 	{
-		auto first = this->c.cbegin();
-		auto last = this->c.cend();
+		auto first = this->cbegin();
+		auto last = this->cend();
 		while (first != last) {
-			if (*first == val) return first;
+			if ((*first).node == val) return *first;
 			++first;
 		}
-		return last;
-	}
-	
-	NodeRecord get(const int) const
-	{
-		NodeRecord first = this->c.cbegin();
-		NodeRecord last = this->c.cend();
-		while (first != last) {
-			if (*first.node == val) return first;
-			++first;
-		}
-		return last;
+		return *last;
 	}
 
-	bool contains(const int) const
+	bool contains(const int val) const
 	{
-		NodeRecord first = this->c.cbegin();
-		NodeRecord last = this->c.cend();
+		auto first = this->cbegin();
+		auto last = this->cend();
 		while (first != last) {
-			if (*first.node == val) return first;
+			if ((*first).node == val) return true;
 			++first;
 		}
-		return last;
+		return false;
 	}
 
-	void remove(const int) const
+	void remove(const int val)
 	{
-		NodeRecord first = this->c.cbegin();
-		NodeRecord last = this->c.cend();
+		auto first = this->cbegin();
+		auto last = this->cend();
 		while (first != last) {
-			if (*first.node == val)
+			if ((*first).node == val)
 			{
-				this->c.erase(first);
-				std::make_heap(this->c.begin(), this->c.end(), this->comp);
+				this->erase(first);
+				return;
 			}
 			++first;
 		}
